@@ -1,11 +1,11 @@
 import os
 
-def get_file_info(directory):
+def get_info(directory):
     file_info_list = []
 
-    for root, dirs, files in os.walk(directory):
+    for root, dirs, files in os.walk(directory): # This part makes it recursive
         for file in files:
-            file_path = os.path.join(root, file)
+            file_path = os.path.join(root, file) 
 
             file_info = {
                 "File Name": file,
@@ -17,11 +17,11 @@ def get_file_info(directory):
 
     return file_info_list
 
-# Get current working directory
+# Gets current working directory
 cw_directory = os.getcwd()
 
-file_info_list = get_file_info(cw_directory)
+file_info_list = get_info(cw_directory)
 
-# Print list of dictionaries
+# Print list of dictionaies 
 for file_info in file_info_list:
     print(file_info)
