@@ -12,20 +12,23 @@ def get_file_info(directory):
 
             file_info = {
                 "File Name": each,
-                "File Size (bytes)": os.path.getsize(file_path), 
+                "File Size (bytes)": os.path.getsize(file_path),
                 "File Type": each.split('.')[-1],  # Gets the file extension
                 "File Path": file_path, # States full directory path for the file
             }
             file_info_list.append(file_info) # Puts it all together in a list
     return file_info_list
 
-def choose_directory(): # Allows user input or defaults to the current working directory
-    path = input("Directory: ") # Need to put the whole file path (ex ../OtisCorp_ship_parts_Engines)
-    if not path: # If no directory is specified, 
-        path = os.getcwd() 
+def choose_directory(): 
+    path = input("Directory: ") # Allows user input of directory path.
+    if not path: 
+        path = os.getcwd() # Defaults to current working directory if no path is given
+    else:
+        path = os.path.abspath(path)  # Converts the input path to an absolute path (so chosen directory is also recursive)
 
     result = get_file_info(path)
-    print(result)
+    for item in result:
+        print(item)
 
 if __name__ == "__main__":
     choose_directory()
